@@ -1,0 +1,14 @@
+{
+  "name": "new-vk-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eduard Simonyan",
+  "license": "ISC",
+  "dependencies": {
+    "vk-io": "3.1.5"
+  }
+}
