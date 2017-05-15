@@ -8,9 +8,7 @@ vk.longpoll.on("message", (msg) => {
     }
     vk.api.messages.getHistory({user_id: msg.user})
         .then((doc) => {
-            if (0 === doc.in_read) {
-                msg.send(config.message);
-            }
+            (0 === doc.in_read) ? msg.send(config.message) : false;
         })
         .catch((err) => {console.error(err)});
 });
