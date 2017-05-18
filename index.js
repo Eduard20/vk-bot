@@ -10,5 +10,5 @@ vk.longpoll.on("message", (msg) => {
         .then((doc) => {
             (0 === doc.in_read) ? msg.send(config.message) : false;
         })
-        .catch((err) => {console.error(err)});
+        .catch(console.error);
 });
