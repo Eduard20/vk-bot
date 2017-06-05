@@ -9,6 +9,7 @@
   "author": "Eduard Simonyan",
   "license": "ISC",
   "dependencies": {
+    "underscore": "1.8.3",
     "vk-io": "3.1.5"
   }
 }
