@@ -24,8 +24,8 @@ vk.longpoll.on("message", (msg) => {
     });
     const result = [];
     const def = 0;
-    recursiveFunc(arr[0], def, 0);
-    recursiveFunc(arr[1], def, 1)
+    recursiveFunc(arr[0], def, 0, msg);
+    recursiveFunc(arr[1], def, 1, msg)
         .then(doc => {
             _.each(doc[0].items, one => {
                 _.find(doc[1].items, sec => {
@@ -39,10 +39,14 @@ vk.longpoll.on("message", (msg) => {
             array[1].items = [];
             msg.send(`${percent}%`)
         })
-        .catch(console.log);
+        .catch((err) => {
+            console.log(err);
+            msg.send(`Пожалуйста введите две ссылки на паблик 
+            пример : vk.com/group1 vk.com/group2`)
+        });
 });
 
-const recursiveFunc = (id, offset, num) => {
+const recursiveFunc = (id, offset, num, msg) => {
     return new Promise ((resolve, reject) => {
         vk.api.groups.getMembers({group_id: id, offset})
             .then(doc => {
@@ -50,8 +54,10 @@ const recursiveFunc = (id, offset, num) => {
                     _.each(doc.items, one => {
                        array[num].items.push(one);
                     });
+                    const prcnt = array[num].items.length * 100/doc.count;
+                    msg.send(`${id}:${prcnt}%`);
                     offset +=1000;
-                    recursiveFunc(id, offset, num)
+                    recursiveFunc(id, offset, num, msg)
                         .then(resolve)
                         .catch(reject);
                     return;
